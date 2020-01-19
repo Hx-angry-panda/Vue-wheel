@@ -1,44 +1,43 @@
 <template>
-    <button class="g-button">按钮</button>
+    <button class="g-button" v-bind:class="{[`icon-${iconPosition}`]: true}">
+        <svg v-if="icon" class="icon">
+            <use v-bind:xlink:href="`#i-${icon}`"/>
+        </svg>
+        <div class="content">
+            <slot></slot>
+        </div>
+    </button>
 </template>
 <script>
-    export default {}
+    export default {
+        props: ['icon', 'icon-position']
+    }
 </script>
 <style lang="scss">
     *{margin: 0; padding: 0; box-sizing: border-box;}
+    :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
+    .g-button{font-size: var(--font-size);height: var(--button-height);padding: 0 1em;border-radius: var(--border-radius);border: 1px solid var(--border-color);background: var(--button-bg);
+        display: inline-flex; justify-content: center; align-items: center; vertical-align: middle;
+    }
+    .g-button:hover{border-color: var(--border-color-hover);}
+    .g-button:active{background: var(--button-active-bg);}
+    .g-button:focus{outline: none;}
+    #app{margin: 20px;}
 
-    /*采用变量的写法不会造成字体不一*/
-    :root{
-        --button-height: 32px;
-        --font-size: 14px;
-        --button-bg: white;
-        --button-active-bg: #eee;
-        --border-radius: 4px;
-        --color: #333;
-        --border-color: #999;
-        --border-color-hover: #666;
+    .g-button > .content{
+        order: 2;
     }
-    /*.g-button{*/
-    /*    font-size: 14px; 这样写的弊端：如果 button 前有字，且字体大小不一，则不协调*/
-    /*}*/
-    .g-button{
-        font-size: var(--font-size);
-        height: var(--button-height);
-        padding: 0 1em;
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
-        background: var(--button-bg);
+    .g-button > .icon{
+        order: 1;
+        margin-right: .3em;
     }
-    .g-button:hover{
-        border-color: var(--border-color-hover);
+
+    .g-button.icon-right > .content{
+        order: 1;
     }
-    .g-button:active{
-        background: var(--button-active-bg);
-    }
-    .g-button:focus{
-        outline: none;
-    }
-    #app{
-        margin: 20px;
+    .g-button.icon-right > .icon{
+        order: 2;
+        margin-right: 0;
+        margin-left: .3em;
     }
 </style>

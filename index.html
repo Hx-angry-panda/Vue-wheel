@@ -6,11 +6,26 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wheel-demo</title>
+    <style type="text/css">
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    <g-button></g-button>
+<!--    默认左边-->
+    <g-button icon="setting">hello world</g-button>
+<!--    icon 左边-->
+    <g-button icon="setting" icon-position="left">hello world</g-button>
+<!--    icon 右边-->
+    <g-button icon="setting" icon-position="right">hello world</g-button>
+    <g-button>hello</g-button>
 </div>
 <script src="./src/app.js"></script>
+<script src="//at.alicdn.com/t/font_1619203_4y6nf8jaatr.js"></script>
 </body>
 </html>
