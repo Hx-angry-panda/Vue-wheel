@@ -1,7 +1,7 @@
 <template>
-    <button class="g-button" v-bind:class="{[`icon-${iconPosition}`]: true}">
-        <g-icon v-if="icon" v-bind:name="icon" class="icon"></g-icon>
-        <g-icon class="loading" name="loading"></g-icon>
+    <button class="g-button" v-bind:class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')">
+        <g-icon v-if="icon && !loading" v-bind:name="icon" class="icon"></g-icon>
+        <g-icon class="loading icon" v-if="loading" name="loading"></g-icon>
         <div class="content">
             <slot></slot>
         </div>

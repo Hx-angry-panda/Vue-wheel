@@ -22,14 +22,16 @@
 <!--    icon 左边-->
     <g-button icon="setting" icon-position="left">hello world</g-button>
 <!--    icon 右边-->
-    <g-button icon="setting" icon-position="right">hello world</g-button>
+    <g-button icon="setting" :loading="true" icon-position="right">hello world</g-button>
     <g-button>hello</g-button>
-
     <g-icon name="download"></g-icon>
 
+    <br>
 <!--    不加 v-bind 是传字符串 true <g-button loading="true"></g-button>-->
 <!--    加 v-bind 是绑定 loading，传的是 JS 的 true-->
-    <g-button v-bind:loading="true"></g-button>
+    <g-button v-bind:loading="loading1" @click="loading1 = !loading1"></g-button>
+    <g-button icon="setting" :loading="loading2" @click="loading2 = !loading2">hello world</g-button>
+    <g-button icon="setting" :loading="loading3" @click="loading3 = !loading3" icon-position="right">hello world</g-button>
 
 </div>
 <script src="./src/app.js"></script>
