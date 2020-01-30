@@ -27,9 +27,12 @@
 
     <g-icon name="download"></g-icon>
 
+<!--    不加 v-bind 是传字符串 true <g-button loading="true"></g-button>-->
+<!--    加 v-bind 是绑定 loading，传的是 JS 的 true-->
+    <g-button v-bind:loading="true"></g-button>
 
 </div>
 <script src="./src/app.js"></script>
-<script src="//at.alicdn.com/t/font_1619203_4y6nf8jaatr.js"></script>
+<script src="//at.alicdn.com/t/font_1619203_vufjofa15p.js"></script>
 </body>
 </html>
