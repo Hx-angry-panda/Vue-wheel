@@ -38,13 +38,13 @@
         &:hover{border-color: var(--border-color-hover);}
         &:active{background: var(--button-active-bg);}
         &:focus{outline: none;}
-    }
-     > .content{
-        order: 2;
-    }
-    > .icon{
-        order: 1;
-        margin-right: .3em;
+        > .content{
+            order: 2;
+        }
+        > .icon{
+            order: 1;
+            margin-right: .3em;
+        }
     }
     .g-button.icon-right {
         > .content{
