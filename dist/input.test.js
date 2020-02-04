@@ -272,7 +272,7 @@ exports.default = _default;
     
         /* template */
         Object.assign($924b3b, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrapper",class:{'error': _vm.iserror}},[_c('input',{attrs:{"type":"text","disabled":_vm.disabled,"readonly":_vm.readonly},domProps:{"value":_vm.value},on:{"change":function($event){return _vm.$emit('change', $event)},"input":function($event){return _vm.$emit('input', $event)},"focus":function($event){return _vm.$emit('focus', $event)},"blur":function($event){return _vm.$emit('blur', $event)}}}),_vm._v(" "),(_vm.iserror)?[_c('g-icon',{staticClass:"error-icon",attrs:{"name":"setting"}}),_vm._v(" "),_c('span',{staticClass:"error-message"},[_vm._v(_vm._s(_vm.iserror))])]:_vm._e()],2)}
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrapper",class:{'error': _vm.iserror}},[_c('input',{attrs:{"type":"text","disabled":_vm.disabled,"readonly":_vm.readonly},domProps:{"value":_vm.value},on:{"change":function($event){return _vm.$emit('change', $event.target.value)},"input":function($event){return _vm.$emit('input', $event.target.value)},"focus":function($event){return _vm.$emit('focus', $event.target.value)},"blur":function($event){return _vm.$emit('blur', $event.target.value)}}}),_vm._v(" "),(_vm.iserror)?[_c('g-icon',{staticClass:"error-icon",attrs:{"name":"setting"}}),_vm._v(" "),_c('span',{staticClass:"error-message"},[_vm._v(_vm._s(_vm.iserror))])]:_vm._e()],2)}
 var staticRenderFns = []
 
           return {
@@ -358,44 +358,18 @@ describe('Input', function () {
       var callback = sinon.fake();
       vm.$on(eventName, callback);
       var event = new Event(eventName);
+      Object.defineProperty(event, 'target', {
+        value: {
+          value: 'hi'
+        },
+        enumerable: true
+      });
       var inputElement = vm.$el.querySelector('input');
       inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith(event);
+      expect(callback).to.have.been.calledWith('hi');
       vm.$destroy();
     });
-  }); // it('可以设置 input  事件的输入框', () => {
-  //     const Constructor = Vue.extend(Input)
-  //     const vm = new Constructor({}).$mount()
-  //     const callback = sinon.fake()
-  //     vm.$on('input', callback)
-  //     let event = new Event('input')
-  //     const inputElement = vm.$el.querySelector('input')
-  //     inputElement.dispatchEvent(event)
-  //     expect(callback).to.have.been.calledWith(event)
-  //     vm.$destroy()
-  // })
-  // it('可以设置 focus  事件的输入框', () => {
-  //     const Constructor = Vue.extend(Input)
-  //     const vm = new Constructor({}).$mount()
-  //     const callback = sinon.fake()
-  //     vm.$on('focus', callback)
-  //     let event = new Event('focus')
-  //     const inputElement = vm.$el.querySelector('input')
-  //     inputElement.dispatchEvent(event)
-  //     expect(callback).to.have.been.calledWith(event)
-  //     vm.$destroy()
-  // })
-  // it('可以设置 blur  事件的输入框', () => {
-  //     const Constructor = Vue.extend(Input)
-  //     const vm = new Constructor({}).$mount()
-  //     const callback = sinon.fake()
-  //     vm.$on('blur', callback)
-  //     let event = new Event('blur')
-  //     const inputElement = vm.$el.querySelector('input')
-  //     inputElement.dispatchEvent(event)
-  //     expect(callback).to.have.been.calledWith(event)
-  //     vm.$destroy()
-  // })
+  });
 });
 },{"vue":"ApMz","../src/input":"eGlL"}]},{},["spTe"], null)
 //# sourceMappingURL=/input.test.js.map

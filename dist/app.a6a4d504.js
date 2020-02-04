@@ -12820,16 +12820,16 @@ exports.default = _default;
         domProps: { value: _vm.value },
         on: {
           change: function($event) {
-            return _vm.$emit("change", $event)
+            return _vm.$emit("change", $event.target.value)
           },
           input: function($event) {
-            return _vm.$emit("input", $event)
+            return _vm.$emit("input", $event.target.value)
           },
           focus: function($event) {
-            return _vm.$emit("focus", $event)
+            return _vm.$emit("focus", $event.target.value)
           },
           blur: function($event) {
-            return _vm.$emit("blur", $event)
+            return _vm.$emit("blur", $event.target.value)
           }
         }
       }),
@@ -12911,20 +12911,21 @@ new _vue.default({
   data: {
     loading1: false,
     loading2: true,
-    loading3: false
+    loading3: false,
+    message: 'ok'
   },
   methods: {
     inputChange: function inputChange(e) {
-      console.log(e.target.value);
+      console.log(e);
     },
     inputInput: function inputInput(e) {
-      console.log(e.target.value);
+      console.log(e);
     },
     inputFocus: function inputFocus(e) {
-      console.log(e.target.value);
+      console.log(e);
     },
     inputBlur: function inputBlur(e) {
-      console.log(e.target.value);
+      console.log(e);
     }
   }
 });

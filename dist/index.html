@@ -48,7 +48,9 @@
 
     <div>
         <label>change 事件</label>
-        <g-input @change="inputChange"></g-input>
+        <g-input @change="inputChange" v-model="message"></g-input>
+        <p>{{message}}</p>
+        <button @click="message+=1">+1</button>
     </div>
     <div>
         <label>input 事件</label>
