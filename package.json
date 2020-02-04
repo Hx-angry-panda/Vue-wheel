@@ -1,6 +1,6 @@
 {
   "name": "panda-ui-demo-1",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "基于Vue.js的组件库",
   "main": "dist/index.js",
   "scripts": {
