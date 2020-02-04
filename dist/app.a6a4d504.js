@@ -12776,7 +12776,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 var _default = {
   name: 'PandaInput',
   components: {
@@ -12818,7 +12817,21 @@ exports.default = _default;
     [
       _c("input", {
         attrs: { type: "text", disabled: _vm.disabled, readonly: _vm.readonly },
-        domProps: { value: _vm.value }
+        domProps: { value: _vm.value },
+        on: {
+          change: function($event) {
+            return _vm.$emit("change", $event)
+          },
+          input: function($event) {
+            return _vm.$emit("input", $event)
+          },
+          focus: function($event) {
+            return _vm.$emit("focus", $event)
+          },
+          blur: function($event) {
+            return _vm.$emit("blur", $event)
+          }
+        }
       }),
       _vm._v(" "),
       _vm.iserror
@@ -12899,6 +12912,20 @@ new _vue.default({
     loading1: false,
     loading2: true,
     loading3: false
+  },
+  methods: {
+    inputChange: function inputChange(e) {
+      console.log(e.target.value);
+    },
+    inputInput: function inputInput(e) {
+      console.log(e.target.value);
+    },
+    inputFocus: function inputFocus(e) {
+      console.log(e.target.value);
+    },
+    inputBlur: function inputBlur(e) {
+      console.log(e.target.value);
+    }
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

@@ -48,6 +48,24 @@
     <g-input value="王五" readonly></g-input>
     <g-input value="王五" :readonly="true"></g-input>
     <g-input iserror="姓名不能少于两个字"></g-input>
+
+    <div>
+        <label>change 事件</label>
+        <g-input @change="inputChange"></g-input>
+    </div>
+    <div>
+        <label>input 事件</label>
+        <g-input @input="inputInput"></g-input>
+    </div>
+    <div>
+        <label>foucs 事件</label>
+        <g-input @focus="inputFocus"></g-input>
+    </div>
+    <div>
+        <label>blur 事件</label>
+        <g-input @blur="inputBlur"></g-input>
+    </div>
+
 </div>
 <script src="./src/app.js"></script>
 </body>

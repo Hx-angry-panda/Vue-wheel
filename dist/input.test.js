@@ -219,7 +219,7 @@ var staticRenderFns = []
           };
         })());
       
-},{"./svg":"kLUt"}],"qcet":[function(require,module,exports) {
+},{"./svg":"kLUt"}],"eGlL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -240,137 +240,162 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
-  name: 'PandaButton',
+  name: 'PandaInput',
   components: {
     'g-icon': _icon.default
   },
   props: {
-    icon: {},
-    iconPosition: {
-      type: String,
-      default: 'left',
-      validator: function validator(value) {
-        return value === 'left' || value === 'right';
-      }
+    value: {
+      type: String
     },
-    loading: {
+    disabled: {
       type: Boolean,
       default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    iserror: {
+      type: String
     }
   }
 };
 exports.default = _default;
-        var $2cd60d = exports.default || module.exports;
+        var $924b3b = exports.default || module.exports;
       
-      if (typeof $2cd60d === 'function') {
-        $2cd60d = $2cd60d.options;
+      if (typeof $924b3b === 'function') {
+        $924b3b = $924b3b.options;
       }
     
         /* template */
-        Object.assign($2cd60d, (function () {
-          var render = function () {
-var _obj;
-var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{staticClass:"g-button",class:( _obj = {}, _obj[("icon-" + _vm.iconPosition)] = true, _obj ),on:{"click":function($event){return _vm.$emit('click')}}},[(_vm.icon && !_vm.loading)?_c('g-icon',{staticClass:"icon",attrs:{"name":_vm.icon}}):_vm._e(),_vm._v(" "),(_vm.loading)?_c('g-icon',{staticClass:"loading icon",attrs:{"name":"loading"}}):_vm._e(),_vm._v(" "),_c('div',{staticClass:"content"},[_vm._t("default")],2)],1)}
+        Object.assign($924b3b, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrapper",class:{'error': _vm.iserror}},[_c('input',{attrs:{"type":"text","disabled":_vm.disabled,"readonly":_vm.readonly},domProps:{"value":_vm.value},on:{"change":function($event){return _vm.$emit('change', $event)},"input":function($event){return _vm.$emit('input', $event)},"focus":function($event){return _vm.$emit('focus', $event)},"blur":function($event){return _vm.$emit('blur', $event)}}}),_vm._v(" "),(_vm.iserror)?[_c('g-icon',{staticClass:"error-icon",attrs:{"name":"setting"}}),_vm._v(" "),_c('span',{staticClass:"error-message"},[_vm._v(_vm._s(_vm.iserror))])]:_vm._e()],2)}
 var staticRenderFns = []
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-2cd60d",
+            _scopeId: "data-v-924b3b",
             functional: undefined
           };
         })());
       
-},{"./icon":"Bqhn"}],"OGAT":[function(require,module,exports) {
+},{"./icon":"Bqhn"}],"spTe":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
 
-var _button = _interopRequireDefault(require("../src/button"));
+var _input = _interopRequireDefault(require("../src/input"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var expect = chai.expect;
 _vue.default.config.productionTip = false;
 _vue.default.config.devtools = false;
-describe('Button', function () {
+describe('Input', function () {
   it('存在.', function () {
-    expect(_button.default).to.be.ok;
+    expect(_input.default).to.be.ok;
   });
-  it('可以设置icon.', function () {
-    var Constructor = _vue.default.extend(_button.default);
+  it('可以设置 input value', function () {
+    var Constructor = _vue.default.extend(_input.default);
 
     var vm = new Constructor({
       propsData: {
-        icon: 'settings'
+        value: '你好'
+      }
+    }).$mount();
+    var inputElement = vm.$el.querySelector('input');
+    expect(inputElement.value).to.equal('你好');
+    vm.$destroy();
+  });
+  it('可以设置 disabled 输入框', function () {
+    var Constructor = _vue.default.extend(_input.default);
+
+    var vm = new Constructor({
+      propsData: {
+        disabled: true
+      }
+    }).$mount();
+    var inputElement = vm.$el.querySelector('input');
+    expect(inputElement.getAttribute('disabled')).to.equal('disabled');
+    vm.$destroy();
+  });
+  it('可以设置 readonly 输入框', function () {
+    var Constructor = _vue.default.extend(_input.default);
+
+    var vm = new Constructor({
+      propsData: {
+        readonly: true
+      }
+    }).$mount();
+    var inputElement = vm.$el.querySelector('input');
+    expect(inputElement.getAttribute('readonly')).to.equal('readonly');
+    vm.$destroy();
+  });
+  it('可以设置 error 输入框', function () {
+    var Constructor = _vue.default.extend(_input.default);
+
+    var vm = new Constructor({
+      propsData: {
+        iserror: 'hello'
       }
     }).$mount();
     var useElement = vm.$el.querySelector('use');
-    expect(useElement.getAttribute('xlink:href')).to.equal('#i-settings');
+    expect(useElement.getAttribute('xlink:href')).to.equal('#i-setting');
+    var spanElement = vm.$el.querySelector('span');
+    expect(spanElement.innerText).to.equal(vm.iserror);
     vm.$destroy();
   });
-  it('可以设置loading.', function () {
-    var Constructor = _vue.default.extend(_button.default);
+  it('可以设置 change/input/focus/blur  事件的输入框', function () {
+    ['change', 'input', 'focus', 'blur'].forEach(function (eventName) {
+      var Constructor = _vue.default.extend(_input.default);
 
-    var vm = new Constructor({
-      propsData: {
-        icon: 'settings',
-        loading: true
-      }
-    }).$mount();
-    var useElements = vm.$el.querySelectorAll('use');
-    expect(useElements.length).to.equal(1);
-    expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading');
-    vm.$destroy();
-  });
-  it('icon 默认的 order 是 1', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-
-    var Constructor = _vue.default.extend(_button.default);
-
-    var vm = new Constructor({
-      propsData: {
-        icon: 'settings'
-      }
-    }).$mount(div);
-    var icon = vm.$el.querySelector('svg');
-    expect(getComputedStyle(icon).order).to.eq('1');
-    vm.$el.remove();
-    vm.$destroy();
-  });
-  it('设置 iconPosition 可以改变 order', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-
-    var Constructor = _vue.default.extend(_button.default);
-
-    var vm = new Constructor({
-      propsData: {
-        icon: 'settings',
-        iconPosition: 'right'
-      }
-    }).$mount(div);
-    var icon = vm.$el.querySelector('svg');
-    expect(getComputedStyle(icon).order).to.eq('2');
-    vm.$el.remove();
-    vm.$destroy();
-  });
-  it('点击 button 触发 click 事件', function () {
-    var Constructor = _vue.default.extend(_button.default);
-
-    var vm = new Constructor({
-      propsData: {
-        icon: 'settings'
-      }
-    }).$mount();
-    var callback = sinon.fake();
-    vm.$on('click', callback);
-    vm.$el.click();
-    expect(callback).to.have.been.called;
-  });
+      var vm = new Constructor({}).$mount();
+      var callback = sinon.fake();
+      vm.$on(eventName, callback);
+      var event = new Event(eventName);
+      var inputElement = vm.$el.querySelector('input');
+      inputElement.dispatchEvent(event);
+      expect(callback).to.have.been.calledWith(event);
+      vm.$destroy();
+    });
+  }); // it('可以设置 input  事件的输入框', () => {
+  //     const Constructor = Vue.extend(Input)
+  //     const vm = new Constructor({}).$mount()
+  //     const callback = sinon.fake()
+  //     vm.$on('input', callback)
+  //     let event = new Event('input')
+  //     const inputElement = vm.$el.querySelector('input')
+  //     inputElement.dispatchEvent(event)
+  //     expect(callback).to.have.been.calledWith(event)
+  //     vm.$destroy()
+  // })
+  // it('可以设置 focus  事件的输入框', () => {
+  //     const Constructor = Vue.extend(Input)
+  //     const vm = new Constructor({}).$mount()
+  //     const callback = sinon.fake()
+  //     vm.$on('focus', callback)
+  //     let event = new Event('focus')
+  //     const inputElement = vm.$el.querySelector('input')
+  //     inputElement.dispatchEvent(event)
+  //     expect(callback).to.have.been.calledWith(event)
+  //     vm.$destroy()
+  // })
+  // it('可以设置 blur  事件的输入框', () => {
+  //     const Constructor = Vue.extend(Input)
+  //     const vm = new Constructor({}).$mount()
+  //     const callback = sinon.fake()
+  //     vm.$on('blur', callback)
+  //     let event = new Event('blur')
+  //     const inputElement = vm.$el.querySelector('input')
+  //     inputElement.dispatchEvent(event)
+  //     expect(callback).to.have.been.calledWith(event)
+  //     vm.$destroy()
+  // })
 });
-},{"vue":"ApMz","../src/button":"qcet"}]},{},["OGAT"], null)
-//# sourceMappingURL=/button.test.js.map
+},{"vue":"ApMz","../src/input":"eGlL"}]},{},["spTe"], null)
+//# sourceMappingURL=/input.test.js.map

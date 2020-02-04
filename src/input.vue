@@ -1,12 +1,11 @@
 <template>
     <div class="wrapper" :class="{'error': iserror}">
-        <input type="text" :value="value" :disabled="disabled" :readonly="readonly">
+        <input type="text" :value="value" :disabled="disabled" :readonly="readonly" @change="$emit('change', $event)" @input="$emit('input', $event)" @focus="$emit('focus', $event)" @blur="$emit('blur', $event)">
         <template v-if="iserror">
             <g-icon name="setting" class="error-icon"></g-icon>
             <span class="error-message">{{iserror}}</span>
         </template>
     </div>
-
 </template>
 
 <script>
