@@ -10,6 +10,7 @@
 <script>
     import Icon from './icon'
     export default {
+        name: 'PandaButton',
         components: {
             'g-icon': Icon
         },
@@ -29,14 +30,11 @@
         }
     }
 </script>
-<style lang="scss">
-    #app{margin: 20px;}
+<style lang="scss" scoped>
     @keyframes spin{
         0%{transform: rotate(0deg);}
         100%{transform: rotate(360deg);}
     }
-    *{margin: 0;padding: 0;box-sizing: border-box;}
-    :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
     .g-button{font-size: var(--font-size);height: var(--button-height);padding: 0 1em;border-radius: var(--border-radius);border: 1px solid var(--border-color);background: var(--button-bg);
         display: inline-flex; justify-content: center; align-items: center; vertical-align: middle;
         &:hover{border-color: var(--border-color-hover);}

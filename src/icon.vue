@@ -7,13 +7,15 @@
 <script>
     import './svg'
     export default {
+        name: 'PandaIcon',
         props: ['name']
     }
 </script>
 
-<style>
+<style lang="scss" scoped>
     .g-icon {
         width: 1em;
         height: 1em;
+        vertical-align: middle;
     }
 </style>

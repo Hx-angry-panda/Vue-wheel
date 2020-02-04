@@ -6,13 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wheel-demo</title>
-    <style type="text/css">
-        .icon {
-            width: 1em; height: 1em;
-            vertical-align: -0.15em;
-            fill: currentColor;
-            overflow: hidden;
-        }
+    <style>
+        #app{margin: 20px;}
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
     </style>
 </head>
 <body>
@@ -26,7 +23,9 @@
     <g-button>hello</g-button>
     <g-icon name="download"></g-icon>
 
+
     <br>
+    <div style="margin: 10px;"></div>
 <!--    不加 v-bind 是传字符串 true <g-button loading="true"></g-button>-->
 <!--    加 v-bind 是绑定 loading，传的是 JS 的 true-->
     <g-button v-bind:loading="loading1" @click="loading1 = !loading1"></g-button>
@@ -34,11 +33,21 @@
     <g-button icon="setting" :loading="loading3" @click="loading3 = !loading3" icon-position="right">hello world</g-button>
 
     <br>
+    <div style="margin: 10px;"></div>
     <g-button-group>
         <g-button icon="left">上一页</g-button>
         <div></div>
         <g-button icon="right" icon-position="right">下一页</g-button>
     </g-button-group>
+
+    <br>
+    <div style="margin: 10px;"></div>
+    <g-input value="张三"></g-input>
+    <g-input :disabled="true" value="李四"></g-input>
+    <g-input disabled value="李四"></g-input>
+    <g-input value="王五" readonly></g-input>
+    <g-input value="王五" :readonly="true"></g-input>
+    <g-input iserror="姓名不能少于两个字"></g-input>
 </div>
 <script src="./src/app.js"></script>
 </body>
