@@ -12900,6 +12900,12 @@ var _default = {
   props: {
     gutter: {
       type: [Number, String]
+    },
+    align: {
+      type: String,
+      validator: function validator(value) {
+        return ['left', 'right', 'center'].includes(value);
+      }
     }
   },
   mounted: function mounted() {
@@ -12916,6 +12922,10 @@ var _default = {
         marginLeft: -gutter / 2 + 'px',
         marginRight: -gutter / 2 + 'px'
       };
+    },
+    rowClass: function rowClass() {
+      var align = this.align;
+      return [align && "align-".concat(align)];
     }
   }
 };
@@ -12934,7 +12944,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row", style: _vm.rowStyle },
+    { staticClass: "row", class: _vm.rowClass, style: _vm.rowStyle },
     [_vm._t("default")],
     2
   )
@@ -12992,10 +13002,10 @@ var _default = {
   name: 'PandaCol',
   props: {
     span: {
-      type: Number
+      type: [Number, String]
     },
     offset: {
-      type: Number
+      type: [Number, String]
     }
   },
   data: function data() {
@@ -13151,7 +13161,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3467" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13003" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -12,10 +12,10 @@
         name: 'PandaCol',
         props: {
             span: {
-                type: Number
+                type: [Number,String]
             },
             offset: {
-                type: Number
+                type: [Number,String]
             }
         },
         data: function(){
