@@ -1,17 +1,3 @@
-.row[data-v-d6a441] {
-  display: flex;
-  flex-wrap: wrap;
-}
-.row.align-left[data-v-d6a441] {
-    justify-content: flex-start;
-}
-.row.align-right[data-v-d6a441] {
-    justify-content: flex-end;
-}
-.row.align-center[data-v-d6a441] {
-    justify-content: center;
-}
-
 .col[data-v-271f01] {
   width: 50%;
 }

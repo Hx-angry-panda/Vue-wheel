@@ -131,74 +131,7 @@ if ("production" === 'production') {
 } else {
   module.exports = require('./vue.common.dev.js');
 }
-},{"./vue.common.prod.js":"BydX"}],"rWcA":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-var _default = {
-  name: 'PandaRow',
-  props: {
-    gutter: {
-      type: [Number, String]
-    },
-    align: {
-      type: String,
-      validator: function validator(value) {
-        return ['left', 'right', 'center'].includes(value);
-      }
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$children.forEach(function (vm) {
-      vm.gutter = _this.gutter;
-    });
-  },
-  computed: {
-    rowStyle: function rowStyle() {
-      var gutter = this.gutter;
-      return {
-        marginLeft: -gutter / 2 + 'px',
-        marginRight: -gutter / 2 + 'px'
-      };
-    },
-    rowClass: function rowClass() {
-      var align = this.align;
-      return [align && "align-".concat(align)];
-    }
-  }
-};
-exports.default = _default;
-        var $d6a441 = exports.default || module.exports;
-      
-      if (typeof $d6a441 === 'function') {
-        $d6a441 = $d6a441.options;
-      }
-    
-        /* template */
-        Object.assign($d6a441, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row",class:_vm.rowClass,style:(_vm.rowStyle)},[_vm._t("default")],2)}
-var staticRenderFns = []
-
-          return {
-            render: render,
-            staticRenderFns: staticRenderFns,
-            _compiled: true,
-            _scopeId: "data-v-d6a441",
-            functional: undefined
-          };
-        })());
-      
-},{}],"sOCM":[function(require,module,exports) {
+},{"./vue.common.prod.js":"BydX"}],"sOCM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -331,12 +264,10 @@ var staticRenderFns = []
           };
         })());
       
-},{}],"Tgvo":[function(require,module,exports) {
+},{}],"FIP2":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
-
-var _row = _interopRequireDefault(require("../src/row"));
 
 var _col = _interopRequireDefault(require("../src/col"));
 
@@ -345,49 +276,122 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var expect = chai.expect;
 _vue.default.config.productionTip = false;
 _vue.default.config.devtools = false;
-describe('Row', function () {
+describe('Col', function () {
   it('存在.', function () {
-    expect(_row.default).to.exist;
+    expect(_col.default).to.exist;
   });
-  it('接收 gutter 属性.', function (done) {
-    _vue.default.component('g-row', _row.default);
-
-    _vue.default.component('g-col', _col.default);
-
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    div.innerHTML = "\n      <g-row gutter=\"20\">\n        <g-col span=\"12\"></g-col>\n        <g-col span=\"12\"></g-col>\n      </g-row>\n    ";
-    var vm = new _vue.default({
-      el: div
-    });
-    setTimeout(function () {
-      var row = vm.$el.querySelector('.row');
-      expect(getComputedStyle(row).marginLeft).to.eq('-10px');
-      expect(getComputedStyle(row).marginRight).to.eq('-10px');
-      var cols = vm.$el.querySelectorAll('.col');
-      expect(getComputedStyle(cols[0]).paddingRight).to.eq('10px');
-      expect(getComputedStyle(cols[1]).paddingLeft).to.eq('10px');
-      done();
-      vm.$el.remove();
-      vm.$destroy();
-    });
-  });
-  it('接收 align 属性', function () {
+  it('接收 span 属性', function () {
     var div = document.createElement('div');
     document.body.appendChild(div);
 
-    var Constructor = _vue.default.extend(_row.default);
+    var Constructor = _vue.default.extend(_col.default);
 
     var vm = new Constructor({
       propsData: {
-        align: 'right'
+        span: 1
       }
     }).$mount(div);
     var element = vm.$el;
-    expect(getComputedStyle(element).justifyContent).to.equal('flex-end');
+    expect(vm.$el.classList.contains('col-1')).to.eq(true);
+    div.remove();
+    vm.$destroy();
+  });
+  it('接收 offset 属性', function () {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+
+    var Constructor = _vue.default.extend(_col.default);
+
+    var vm = new Constructor({
+      propsData: {
+        offset: 1
+      }
+    }).$mount(div);
+    var element = vm.$el;
+    expect(vm.$el.classList.contains('offset-1')).to.eq(true);
+    div.remove();
+    vm.$destroy();
+  });
+  it('接收 pc 属性', function () {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+
+    var Constructor = _vue.default.extend(_col.default);
+
+    var vm = new Constructor({
+      propsData: {
+        pc: {
+          span: 1,
+          offset: 2
+        }
+      }
+    }).$mount(div);
+    var element = vm.$el;
+    expect(vm.$el.classList.contains('col-pc-1')).to.eq(true);
+    expect(vm.$el.classList.contains('offset-pc-2')).to.eq(true);
+    div.remove();
+    vm.$destroy();
+  });
+  it('接收 ipad 属性', function () {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+
+    var Constructor = _vue.default.extend(_col.default);
+
+    var vm = new Constructor({
+      propsData: {
+        ipad: {
+          span: 1,
+          offset: 2
+        }
+      }
+    }).$mount(div);
+    var element = vm.$el;
+    expect(vm.$el.classList.contains('col-ipad-1')).to.eq(true);
+    expect(vm.$el.classList.contains('offset-ipad-2')).to.eq(true);
+    div.remove();
+    vm.$destroy();
+  });
+  it('接收 narrow-pc 属性', function () {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+
+    var Constructor = _vue.default.extend(_col.default);
+
+    var vm = new Constructor({
+      propsData: {
+        narrowPc: {
+          span: 1,
+          offset: 2
+        }
+      }
+    }).$mount(div);
+    var element = vm.$el;
+    expect(vm.$el.classList.contains('col-narrow-pc-1')).to.eq(true);
+    expect(vm.$el.classList.contains('offset-narrow-pc-2')).to.eq(true);
+    div.remove();
+    vm.$destroy();
+  });
+  it('接收 wide-pc 属性', function () {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+
+    var Constructor = _vue.default.extend(_col.default);
+
+    var vm = new Constructor({
+      propsData: {
+        widePc: {
+          span: 1,
+          offset: 2
+        }
+      }
+    }).$mount(div);
+    var element = vm.$el;
+    expect(vm.$el.classList.contains('col-wide-pc-1')).to.eq(true);
+    expect(vm.$el.classList.contains('offset-wide-pc-2')).to.eq(true);
     div.remove();
     vm.$destroy();
   });
 });
-},{"vue":"ApMz","../src/row":"rWcA","../src/col":"sOCM"}]},{},["Tgvo"], null)
-//# sourceMappingURL=/row.test.js.map
+},{"vue":"ApMz","../src/col":"sOCM"}]},{},["FIP2"], null)
+//# sourceMappingURL=/col.test.js.map
