@@ -862,3 +862,18 @@
 }
 }
 
+.layout[data-v-0800c3] {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100vh;
+}
+.layout.hasSider[data-v-0800c3] {
+    flex-direction: row;
+}
+
+.content[data-v-136656] {
+  display: flex;
+  flex-grow: 1;
+}
+

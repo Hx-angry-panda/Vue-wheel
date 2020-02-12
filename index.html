@@ -7,23 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wheel-demo</title>
     <style>
-        #app{margin: 20px;}
         *{margin: 0;padding: 0;box-sizing: border-box;}
         :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
+        .sider{
+            width: 100px;
+            background: #333333;
+        }
+        .header{
+            height: 100px;
+            background: #666666;
+        }
+        .content{
+            background: #999999;
+        }
+        .footer{
+            height: 100px;
+            background: #bbbbbb;
+        }
     </style>
 </head>
 <body>
 <div id="app">
-    <div>
-        <g-row>
-            <g-col span="12" :ipad="{span:8}" :narrow-pc="{span:4}" :pc="{span:2}" :wide-pc="{span:1}">1</g-col>
-            <g-col span="12" :ipad="{span:16}" :narrow-pc="{span:20}" :pc="{span:22}" :wide-pc="{span:23}">2</g-col>
-        </g-row>
-        <g-row>
-            <g-col span="10" offset="2" :ipad="{span:10,offset:2}">1</g-col>
-            <g-col span="10" offset="2" :ipad="{span:10,offset:2}">2</g-col>
-        </g-row>
-    </div>
+    <g-layout>
+        <g-sider class="demo">sider</g-sider>
+        <g-layout>
+            <g-header class="demo">header</g-header>
+            <g-content class="demo">content</g-content>
+            <g--footer class="demo">footer</g--footer>
+        </g-layout>
+    </g-layout>
 </div>
 <script src="./src/app.js"></script>
 </body>
