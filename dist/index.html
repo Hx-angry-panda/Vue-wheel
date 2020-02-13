@@ -6,33 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wheel-demo</title>
     <style>*{margin: 0;padding: 0;box-sizing: border-box;}
-        :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
-        .sider{
-            width: 100px;
-            background: #333333;
-        }
-        .header{
-            height: 100px;
-            background: #666666;
-        }
-        .content{
-            background: #999999;
-        }
-        .footer{
-            height: 100px;
-            background: #bbbbbb;
-        }</style>
+        :root{--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}</style>
 <link rel="stylesheet" href="/app.a6a4d504.css"></head>
 <body>
 <div id="app">
-    <g-layout>
-        <g-sider class="demo">sider</g-sider>
-        <g-layout>
-            <g-header class="demo">header</g-header>
-            <g-content class="demo">content</g-content>
-            <g--footer class="demo">footer</g--footer>
-        </g-layout>
-    </g-layout>
+    <button @click="showToast">点我出现Toast</button>
 </div>
 <script src="/app.a6a4d504.js"></script>
 </body>
