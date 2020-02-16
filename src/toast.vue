@@ -3,7 +3,7 @@
         <slot v-if="!enableHtml"></slot>
         <div v-else v-html="$slots.default[0]"></div>
         <div class="line" ref="line"></div>
-        <span @click="onClickClose" class="close">
+        <span @click="onClickClose" v-if="closeButton" class="close">
             {{closeButton.text}}
         </span>
     </div>
@@ -26,9 +26,7 @@
                 default: () => {
                     return {
                         text: '关闭',
-                        callback: (toast) => {
-                            toast.close()
-                        }
+                        callback: undefined
                     }
                 }
             },
@@ -48,6 +46,9 @@
             },
             onClickClose: function () {
                 this.close()
+                if (this.closeButton && typeof this.closeButton.callback === 'function') {
+                    this.closeButton.callback(this)//this === toast实例
+                }
             },
             updateStyles (){
                 this.$nextTick(() => {

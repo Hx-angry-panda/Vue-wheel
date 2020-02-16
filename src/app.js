@@ -49,7 +49,17 @@ new Vue({
             console.log(e);
         },
         showToast: function () {
-            this.$toast('我是<strong>加粗文字</strong>',{enableHtml: true})
+            this.$toast('我是<strong>加粗文字</strong>',{
+                enableHtml: true,
+                closeButton: {
+                    text: '已充值',
+                    callback (){
+                        console.log('智商充值失败')
+                    }
+                },
+                autoClose: true,
+                autoCloseDelay: 3
+            })
         }
     }
 })

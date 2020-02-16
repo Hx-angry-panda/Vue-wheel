@@ -13521,9 +13521,7 @@ var _default = {
       default: function _default() {
         return {
           text: '关闭',
-          callback: function callback(toast) {
-            toast.close();
-          }
+          callback: undefined
         };
       }
     },
@@ -13543,6 +13541,10 @@ var _default = {
     },
     onClickClose: function onClickClose() {
       this.close();
+
+      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+        this.closeButton.callback(this); //this === toast实例
+      }
     },
     updateStyles: function updateStyles() {
       var _this = this;
@@ -13585,9 +13587,13 @@ exports.default = _default;
       _vm._v(" "),
       _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
-      _c("span", { staticClass: "close", on: { click: _vm.onClickClose } }, [
-        _vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")
-      ])
+      _vm.closeButton
+        ? _c(
+            "span",
+            { staticClass: "close", on: { click: _vm.onClickClose } },
+            [_vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")]
+          )
+        : _vm._e()
     ],
     2
   )
@@ -13733,7 +13739,15 @@ new _vue.default({
     },
     showToast: function showToast() {
       this.$toast('我是<strong>加粗文字</strong>', {
-        enableHtml: true
+        enableHtml: true,
+        closeButton: {
+          text: '已充值',
+          callback: function callback() {
+            console.log('智商充值失败');
+          }
+        },
+        autoClose: true,
+        autoCloseDelay: 3
       });
     }
   }
