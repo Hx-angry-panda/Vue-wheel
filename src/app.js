@@ -57,8 +57,9 @@ new Vue({
                         console.log('智商充值失败')
                     }
                 },
-                autoClose: true,
-                autoCloseDelay: 3
+                autoClose: false,
+                autoCloseDelay: 3,
+                position: 'middle'
             })
         }
     }

@@ -882,9 +882,7 @@
   min-height: 40px;
   line-height: 1.8;
   position: fixed;
-  top: 0;
   left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   color: white;
@@ -892,6 +890,18 @@
   border-radius: 4px;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   padding: 0 16px;
+}
+.toast.position-top[data-v-f904b0] {
+    top: 0;
+    transform: translateX(-50%);
+}
+.toast.position-bottom[data-v-f904b0] {
+    bottom: 0;
+    transform: translateX(-50%);
+}
+.toast.position-middle[data-v-f904b0] {
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .line[data-v-f904b0] {
   height: 100%;

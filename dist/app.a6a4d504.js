@@ -12904,7 +12904,7 @@ var _default = {
     align: {
       type: String,
       validator: function validator(value) {
-        return ['left', 'right', 'center'].includes(value);
+        return ['left', 'right', 'center'].indexOf(value) >= 0;
       }
     }
   },
@@ -13013,7 +13013,7 @@ var validator = function validator(value) {
   var valid = true;
   keys.forEach(function (key) {
     //对数组每个元素执行一次函数
-    if (!['span', 'offset'].includes(key)) {
+    if (!['span', 'offset'].indexOf(key) >= 0) {
       valid = false;
     }
   });
@@ -13494,6 +13494,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -13528,6 +13531,13 @@ var _default = {
     enableHtml: {
       type: Boolean,
       default: false
+    },
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'bottom', 'middle'].indexOf(value) >= 0; //ie 9也支持
+      }
     }
   },
   mounted: function mounted() {
@@ -13562,6 +13572,11 @@ var _default = {
         }, this.autoCloseDelay * 1000);
       }
     }
+  },
+  computed: {
+    toastClasses: function toastClasses() {
+      return _defineProperty({}, "position-".concat(this.position), true);
+    }
   }
 };
 exports.default = _default;
@@ -13579,7 +13594,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { ref: "wrapper", staticClass: "toast" },
+    { ref: "wrapper", staticClass: "toast", class: _vm.toastClasses },
     [
       !_vm.enableHtml
         ? _vm._t("default")
@@ -13746,8 +13761,9 @@ new _vue.default({
             console.log('智商充值失败');
           }
         },
-        autoClose: true,
-        autoCloseDelay: 3
+        autoClose: false,
+        autoCloseDelay: 3,
+        position: 'middle'
       });
     }
   }
