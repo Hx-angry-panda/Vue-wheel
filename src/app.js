@@ -49,7 +49,7 @@ new Vue({
             console.log(e);
         },
         showToast: function () {
-            this.$toast('我是Toast')
+            this.$toast('我是<strong>加粗文字</strong>',{enableHtml: true})
         }
     }
 })

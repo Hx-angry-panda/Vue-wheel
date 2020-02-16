@@ -13500,8 +13500,67 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
-  name: 'PandaToast'
+  name: 'PandaToast',
+  props: {
+    autoClose: {
+      type: Boolean,
+      default: true
+    },
+    autoCloseDelay: {
+      type: Number,
+      default: 5
+    },
+    closeButton: {
+      type: Object,
+      default: function _default() {
+        return {
+          text: '关闭',
+          callback: function callback(toast) {
+            toast.close();
+          }
+        };
+      }
+    },
+    enableHtml: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted: function mounted() {
+    this.updateStyles();
+    this.execAutoClose();
+  },
+  methods: {
+    close: function close() {
+      this.$el.remove();
+      this.$destroy();
+    },
+    onClickClose: function onClickClose() {
+      this.close();
+    },
+    updateStyles: function updateStyles() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.$refs.line.style.height = "".concat(_this.$refs.wrapper.getBoundingClientRect().height, "px");
+      });
+    },
+    execAutoClose: function execAutoClose() {
+      var _this2 = this;
+
+      if (this.autoClose) {
+        setTimeout(function () {
+          _this2.close();
+        }, this.autoCloseDelay * 1000);
+      }
+    }
+  }
 };
 exports.default = _default;
         var $f904b0 = exports.default || module.exports;
@@ -13516,7 +13575,22 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "toast" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    { ref: "wrapper", staticClass: "toast" },
+    [
+      !_vm.enableHtml
+        ? _vm._t("default")
+        : _c("div", { domProps: { innerHTML: _vm._s(_vm.$slots.default[0]) } }),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
+      _vm._v(" "),
+      _c("span", { staticClass: "close", on: { click: _vm.onClickClose } }, [
+        _vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13565,9 +13639,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = {
   install: function install(Vue, options) {
-    Vue.prototype.$toast = function (message) {
+    Vue.prototype.$toast = function (message, options) {
       var Constructor = Vue.extend(_toast.default);
-      var toast = new Constructor();
+      var toast = new Constructor({
+        propsData: options
+      });
       toast.$slots.default = [message];
       toast.$mount();
       document.body.appendChild(toast.$el);
@@ -13656,7 +13732,9 @@ new _vue.default({
       console.log(e);
     },
     showToast: function showToast() {
-      this.$toast('我是Toast');
+      this.$toast('我是<strong>加粗文字</strong>', {
+        enableHtml: true
+      });
     }
   }
 });
@@ -13688,7 +13766,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1751" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1315" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
