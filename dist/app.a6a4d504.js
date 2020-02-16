@@ -13508,6 +13508,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   name: 'PandaToast',
   props: {
@@ -13561,7 +13566,7 @@ var _default = {
       var _this = this;
 
       this.$nextTick(function () {
-        _this.$refs.line.style.height = "".concat(_this.$refs.wrapper.getBoundingClientRect().height, "px");
+        _this.$refs.line.style.height = "".concat(_this.$refs.toast.getBoundingClientRect().height, "px");
       });
     },
     execAutoClose: function execAutoClose() {
@@ -13593,13 +13598,20 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { ref: "wrapper", staticClass: "toast", class: _vm.toastClasses },
-    [
-      !_vm.enableHtml
-        ? _vm._t("default")
-        : _c("div", { domProps: { innerHTML: _vm._s(_vm.$slots.default[0]) } }),
+  return _c("div", { staticClass: "wrapper", class: _vm.toastClasses }, [
+    _c("div", { ref: "toast", staticClass: "toast" }, [
+      _c(
+        "div",
+        { staticClass: "message" },
+        [
+          !_vm.enableHtml
+            ? _vm._t("default")
+            : _c("div", {
+                domProps: { innerHTML: _vm._s(_vm.$slots.default[0]) }
+              })
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
@@ -13610,9 +13622,8 @@ exports.default = _default;
             [_vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")]
           )
         : _vm._e()
-    ],
-    2
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
