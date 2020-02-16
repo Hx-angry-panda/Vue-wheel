@@ -49,6 +49,7 @@
         methods: {
             close: function () {
                 this.$el.remove()
+                this.$emit('close')
                 this.$destroy()
             },
             onClickClose: function () {
