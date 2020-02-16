@@ -13517,12 +13517,11 @@ var _default = {
   name: 'PandaToast',
   props: {
     autoClose: {
-      type: Boolean,
-      default: true
-    },
-    autoCloseDelay: {
-      type: Number,
-      default: 5
+      type: [Number, Boolean],
+      default: 5,
+      validator: function validator(value) {
+        return value === false || typeof value === 'number';
+      }
     },
     closeButton: {
       type: Object,
@@ -13575,7 +13574,7 @@ var _default = {
       if (this.autoClose) {
         setTimeout(function () {
           _this2.close();
-        }, this.autoCloseDelay * 1000);
+        }, this.autoClose * 1000);
       }
     }
   },
@@ -13795,8 +13794,7 @@ new _vue.default({
             console.log('智商充值失败');
           }
         },
-        autoClose: false,
-        autoCloseDelay: 3,
+        autoClose: 3,
         position: 'middle'
       });
     }

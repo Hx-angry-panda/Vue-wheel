@@ -152,7 +152,7 @@ var _default = {
     align: {
       type: String,
       validator: function validator(value) {
-        return ['left', 'right', 'center'].includes(value);
+        return ['left', 'right', 'center'].indexOf(value) >= 0;
       }
     }
   },
@@ -229,7 +229,7 @@ var validator = function validator(value) {
   var valid = true;
   keys.forEach(function (key) {
     //对数组每个元素执行一次函数
-    if (!['span', 'offset'].includes(key)) {
+    if (!['span', 'offset'].indexOf(key) >= 0) {
       valid = false;
     }
   });

@@ -131,7 +131,7 @@ if ("production" === 'production') {
 } else {
   module.exports = require('./vue.common.dev.js');
 }
-},{"./vue.common.prod.js":"BydX"}],"sOCM":[function(require,module,exports) {
+},{"./vue.common.prod.js":"BydX"}],"dgLN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -139,13 +139,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -156,242 +150,180 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
-var validator = function validator(value) {
-  var keys = Object.keys(value); //返回数组
-
-  var valid = true;
-  keys.forEach(function (key) {
-    //对数组每个元素执行一次函数
-    if (!['span', 'offset'].indexOf(key) >= 0) {
-      valid = false;
-    }
-  });
-  return valid;
-};
-
+//
+//
+//
+//
+//
+//
+//
 var _default = {
-  name: 'PandaCol',
+  name: 'PandaToast',
   props: {
-    span: {
-      type: [Number, String]
+    autoClose: {
+      type: [Number, Boolean],
+      default: 5,
+      validator: function validator(value) {
+        return value === false || typeof value === 'number';
+      }
     },
-    offset: {
-      type: [Number, String]
-    },
-    ipad: {
+    closeButton: {
       type: Object,
-      validator: validator
+      default: function _default() {
+        return {
+          text: '关闭',
+          callback: undefined
+        };
+      }
     },
-    narrowPc: {
-      type: Object,
-      validator: validator
+    enableHtml: {
+      type: Boolean,
+      default: false
     },
-    pc: {
-      type: Object,
-      validator: validator
-    },
-    widePc: {
-      type: Object,
-      validator: validator
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'bottom', 'middle'].indexOf(value) >= 0; //ie 9也支持
+      }
     }
   },
-  data: function data() {
-    return {
-      gutter: 0
-    };
-  },
-  computed: {
-    colClass: function colClass() {
-      var span = this.span,
-          offset = this.offset,
-          ipad = this.ipad,
-          narrowPc = this.narrowPc,
-          pc = this.pc,
-          widePc = this.widePc;
-      var createClasses = this.createClasses;
-      return [].concat(_toConsumableArray(createClasses({
-        span: span,
-        offset: offset
-      })), _toConsumableArray(createClasses(ipad, 'ipad-')), _toConsumableArray(createClasses(narrowPc, 'narrow-pc-')), _toConsumableArray(createClasses(pc, 'pc-')), _toConsumableArray(createClasses(widePc, 'wide-pc-')));
-    },
-    colStyle: function colStyle() {
-      return {
-        paddingLeft: this.gutter / 2 + 'px',
-        paddingRight: this.gutter / 2 + 'px'
-      };
-    }
+  mounted: function mounted() {
+    this.updateStyles();
+    this.execAutoClose();
   },
   methods: {
-    createClasses: function createClasses(obj) {
-      var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    close: function close() {
+      this.$el.remove();
+      this.$emit('close');
+      this.$destroy();
+    },
+    onClickClose: function onClickClose() {
+      this.close();
 
-      if (!obj) {
-        return [];
+      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+        this.closeButton.callback(this); //this === toast实例
       }
+    },
+    updateStyles: function updateStyles() {
+      var _this = this;
 
-      var array = [];
+      this.$nextTick(function () {
+        _this.$refs.line.style.height = "".concat(_this.$refs.toast.getBoundingClientRect().height, "px");
+      });
+    },
+    execAutoClose: function execAutoClose() {
+      var _this2 = this;
 
-      if (obj.span) {
-        array.push("col-".concat(str).concat(obj.span));
+      if (this.autoClose) {
+        setTimeout(function () {
+          _this2.close();
+        }, this.autoClose * 1000);
       }
-
-      if (obj.offset) {
-        array.push("offset-".concat(str).concat(obj.offset));
-      }
-
-      return array;
+    }
+  },
+  computed: {
+    toastClasses: function toastClasses() {
+      return _defineProperty({}, "position-".concat(this.position), true);
     }
   }
 };
 exports.default = _default;
-        var $271f01 = exports.default || module.exports;
+        var $f904b0 = exports.default || module.exports;
       
-      if (typeof $271f01 === 'function') {
-        $271f01 = $271f01.options;
+      if (typeof $f904b0 === 'function') {
+        $f904b0 = $f904b0.options;
       }
     
         /* template */
-        Object.assign($271f01, (function () {
-          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col",class:_vm.colClass,style:(_vm.colStyle)},[_c('div',[_vm._t("default")],2)])}
+        Object.assign($f904b0, (function () {
+          var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wrapper",class:_vm.toastClasses},[_c('div',{ref:"toast",staticClass:"toast"},[_c('div',{staticClass:"message"},[(!_vm.enableHtml)?_vm._t("default"):_c('div',{domProps:{"innerHTML":_vm._s(_vm.$slots.default[0])}})],2),_vm._v(" "),_c('div',{ref:"line",staticClass:"line"}),_vm._v(" "),(_vm.closeButton)?_c('span',{staticClass:"close",on:{"click":_vm.onClickClose}},[_vm._v("\n        "+_vm._s(_vm.closeButton.text)+"\n    ")]):_vm._e()])])}
 var staticRenderFns = []
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-271f01",
+            _scopeId: "data-v-f904b0",
             functional: undefined
           };
         })());
       
-},{}],"FIP2":[function(require,module,exports) {
+},{}],"jRN6":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
 
-var _col = _interopRequireDefault(require("../src/col"));
+var _toast = _interopRequireDefault(require("../src/toast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var expect = chai.expect;
 _vue.default.config.productionTip = false;
 _vue.default.config.devtools = false;
-describe('Col', function () {
+describe('Toast', function () {
   it('存在.', function () {
-    expect(_col.default).to.exist;
+    expect(_toast.default).to.exist;
   });
-  it('接收 span 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
+  describe('props', function () {
+    it('接受 autoClose', function (done) {
+      var div = document.createElement('div');
+      document.body.appendChild(div);
 
-    var Constructor = _vue.default.extend(_col.default);
+      var Constructor = _vue.default.extend(_toast.default);
 
-    var vm = new Constructor({
-      propsData: {
-        span: 1
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('col-1')).to.eq(true);
-    div.remove();
-    vm.$destroy();
-  });
-  it('接收 offset 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-
-    var Constructor = _vue.default.extend(_col.default);
-
-    var vm = new Constructor({
-      propsData: {
-        offset: 1
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('offset-1')).to.eq(true);
-    div.remove();
-    vm.$destroy();
-  });
-  it('接收 pc 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-
-    var Constructor = _vue.default.extend(_col.default);
-
-    var vm = new Constructor({
-      propsData: {
-        pc: {
-          span: 1,
-          offset: 2
+      var vm = new Constructor({
+        propsData: {
+          autoClose: 1
         }
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('col-pc-1')).to.eq(true);
-    expect(vm.$el.classList.contains('offset-pc-2')).to.eq(true);
-    div.remove();
-    vm.$destroy();
-  });
-  it('接收 ipad 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
+      }).$mount(div);
+      vm.$on('close', function () {
+        expect(document.body.contains(vm.$el)).to.eq(false);
+        done();
+      });
+    });
+    it('接受 closeButton', function () {
+      var callback = sinon.fake();
 
-    var Constructor = _vue.default.extend(_col.default);
+      var Constructor = _vue.default.extend(_toast.default);
 
-    var vm = new Constructor({
-      propsData: {
-        ipad: {
-          span: 1,
-          offset: 2
+      var vm = new Constructor({
+        propsData: {
+          closeButton: {
+            text: '关闭吧',
+            callback: callback
+          }
         }
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('col-ipad-1')).to.eq(true);
-    expect(vm.$el.classList.contains('offset-ipad-2')).to.eq(true);
-    div.remove();
-    vm.$destroy();
-  });
-  it('接收 narrow-pc 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
+      }).$mount();
+      var closeButton = vm.$el.querySelector('.close');
+      expect(closeButton.textContent.trim()).to.eq('关闭吧');
+      closeButton.click();
+      expect(callback).to.have.been.called;
+    });
+    it('接受 enableHtml', function () {
+      var Constructor = _vue.default.extend(_toast.default);
 
-    var Constructor = _vue.default.extend(_col.default);
-
-    var vm = new Constructor({
-      propsData: {
-        narrowPc: {
-          span: 1,
-          offset: 2
+      var vm = new Constructor({
+        propsData: {
+          enableHtml: true
         }
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('col-narrow-pc-1')).to.eq(true);
-    expect(vm.$el.classList.contains('offset-narrow-pc-2')).to.eq(true);
-    div.remove();
-    vm.$destroy();
-  });
-  it('接收 wide-pc 属性', function () {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
+      });
+      vm.$slots.default = ['<strong id="test">hi</strong>'];
+      vm.$mount();
+      var strong = vm.$el.querySelector('#test');
+      expect(strong).to.exist;
+    });
+    it('接受 position', function () {
+      var Constructor = _vue.default.extend(_toast.default);
 
-    var Constructor = _vue.default.extend(_col.default);
-
-    var vm = new Constructor({
-      propsData: {
-        widePc: {
-          span: 1,
-          offset: 2
+      var vm = new Constructor({
+        propsData: {
+          position: 'bottom'
         }
-      }
-    }).$mount(div);
-    var element = vm.$el;
-    expect(vm.$el.classList.contains('col-wide-pc-1')).to.eq(true);
-    expect(vm.$el.classList.contains('offset-wide-pc-2')).to.eq(true);
-    div.remove();
-    vm.$destroy();
+      }).$mount();
+      expect(vm.$el.classList.contains('position-bottom')).to.eq(true);
+    });
   });
 });
-},{"vue":"ApMz","../src/col":"sOCM"}]},{},["FIP2"], null)
-//# sourceMappingURL=/col.test.js.map
+},{"vue":"ApMz","../src/toast":"dgLN"}]},{},["jRN6"], null)
+//# sourceMappingURL=/toast.test.js.map
