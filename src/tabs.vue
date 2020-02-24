@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
     export default {
         name: 'PandaTabs',
         props: {
@@ -19,8 +20,19 @@
                 }
             }
         },
-        created() {
+        data: function () {
+            return {
+                eventBus: new Vue()
+            }
+        },
+        provide(){
+          return {
+              eventBus: this.eventBus
+          }
+        },
+        mounted() {
             // this.$emit('update:selected', 'xxx')
+            this.eventBus.$emit('update:selected', this.selected)
         }
     }
 </script>

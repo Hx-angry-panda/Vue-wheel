@@ -958,3 +958,23 @@
   flex-shrink: 0;
 }
 
+.tabs-head[data-v-d297de] {
+  display: flex;
+  justify-content: flex-start;
+}
+.tabs-head > .actions-wrapper[data-v-d297de] {
+    margin-left: auto;
+}
+
+.tabs-item[data-v-5765b4] {
+  flex-shrink: 0;
+  padding: 0 1em;
+}
+.tabs-item.active[data-v-5765b4] {
+    background: red;
+}
+
+.tabs-pane.active[data-v-46f37b] {
+  background: red;
+}
+

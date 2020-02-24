@@ -5,7 +5,9 @@
 </template>
 <script>
     export default {
-        name: 'PandaTabsBody'
+        name: 'PandaTabsBody',
+        inject: ['eventBus'],
+
     }
 </script>
 <style lang="scss" scoped>
