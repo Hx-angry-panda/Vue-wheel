@@ -14,7 +14,6 @@
         mounted() {
             this.eventBus.$on('update:selected', (item, vm) => {
                 let {width, height, top, left} = vm.$el.getBoundingClientRect()
-                //这里有报错，但 $el 确实存在，报错显示 undefined
                 this.$refs.line.style.width = `${width}px`
                 this.$refs.line.style.left = `${left}px`
             })

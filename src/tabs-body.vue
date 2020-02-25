@@ -7,7 +7,6 @@
     export default {
         name: 'PandaTabsBody',
         inject: ['eventBus'],
-
     }
 </script>
 <style lang="scss" scoped>

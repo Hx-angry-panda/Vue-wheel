@@ -13750,6 +13750,10 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
+    if (this.$children.length === 0) {
+      console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-nav，但你没有写子组件');
+    }
+
     this.$children.forEach(function (vm) {
       if (vm.$options.name === 'PandaTabsHead') {
         vm.$children.forEach(function (childVm) {
@@ -13760,7 +13764,6 @@ var _default = {
         });
       }
     });
-    this.eventBus.$emit('update:selected', this.selected);
   }
 };
 exports.default = _default;
@@ -13838,8 +13841,7 @@ var _default = {
           width = _vm$$el$getBoundingCl.width,
           height = _vm$$el$getBoundingCl.height,
           top = _vm$$el$getBoundingCl.top,
-          left = _vm$$el$getBoundingCl.left; //这里有报错，但 $el 确实存在，报错显示 undefined
-
+          left = _vm$$el$getBoundingCl.left;
 
       _this.$refs.line.style.width = "".concat(width, "px");
       _this.$refs.line.style.left = "".concat(left, "px");
@@ -14006,19 +14008,22 @@ var _default = {
       } //必须放到前面，否则无效
 
 
-      this.eventBus.$emit('update:selected', this.name, this);
+      this.eventBus && this.eventBus.$emit('update:selected', this.name, this);
+      this.$emit('click', this); //测试用例
     }
   },
   created: function created() {
     var _this = this;
 
-    this.eventBus.$on('update:selected', function (name) {
-      if (name === _this.name) {
-        _this.active = true;
-      } else {
-        _this.active = false;
-      }
-    });
+    if (this.eventBus) {
+      this.eventBus.$on('update:selected', function (name) {
+        if (name === _this.name) {
+          _this.active = true;
+        } else {
+          _this.active = false;
+        }
+      });
+    }
   },
   computed: {
     classes: function classes() {
@@ -14047,6 +14052,7 @@ exports.default = _default;
     {
       staticClass: "tabs-item",
       class: _vm.classes,
+      attrs: { "data-name": _vm.name },
       on: { click: _vm.onClick }
     },
     [_vm._t("default")],
@@ -14330,7 +14336,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2206" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "10442" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
