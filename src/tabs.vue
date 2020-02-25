@@ -31,8 +31,18 @@
           }
         },
         mounted() {
-            // this.$emit('update:selected', 'xxx')
+            this.$children.forEach((vm) => {
+                if (vm.$options.name === 'PandaTabsHead') {
+                    vm.$children.forEach((childVm) => {
+                        if (childVm.$options.name === 'PandaTabsItem' && childVm.name === this.selected) {
+                            this.eventBus.$emit('update:selected', this.selected, item)
+                            // item 为选中的那个组件
+                        }
+                    })
+                }
+            })
             this.eventBus.$emit('update:selected', this.selected)
+
         }
     }
 </script>

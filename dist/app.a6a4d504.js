@@ -13748,7 +13748,18 @@ var _default = {
     };
   },
   mounted: function mounted() {
-    // this.$emit('update:selected', 'xxx')
+    var _this = this;
+
+    this.$children.forEach(function (vm) {
+      if (vm.$options.name === 'PandaTabsHead') {
+        vm.$children.forEach(function (childVm) {
+          if (childVm.$options.name === 'PandaTabsItem' && childVm.name === _this.selected) {
+            _this.eventBus.$emit('update:selected', _this.selected, item); // item 为选中的那个组件
+
+          }
+        });
+      }
+    });
     this.eventBus.$emit('update:selected', this.selected);
   }
 };
@@ -13815,9 +13826,13 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'PandaTabsHead',
-  inject: ['eventBus']
+  inject: ['eventBus'],
+  created: function created() {
+    this.eventBus.$emit('update:selected', this.selected);
+  }
 };
 exports.default = _default;
         var $d297de = exports.default || module.exports;
@@ -13837,6 +13852,8 @@ exports.default = _default;
     { staticClass: "tabs-head" },
     [
       _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
       _c("div", { staticClass: "actions-wrapper" }, [_vm._t("actions")], 2)
     ],
@@ -13972,7 +13989,7 @@ var _default = {
   inject: ['eventBus'],
   methods: {
     xxx: function xxx() {
-      this.eventBus.$emit('update:selected', this.name);
+      this.eventBus.$emit('update:selected', this.name, this);
     }
   },
   created: function created() {
@@ -14295,7 +14312,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7714" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2206" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
