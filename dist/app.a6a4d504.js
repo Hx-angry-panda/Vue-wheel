@@ -13754,7 +13754,7 @@ var _default = {
       if (vm.$options.name === 'PandaTabsHead') {
         vm.$children.forEach(function (childVm) {
           if (childVm.$options.name === 'PandaTabsItem' && childVm.name === _this.selected) {
-            _this.eventBus.$emit('update:selected', _this.selected, item); // item 为选中的那个组件
+            _this.eventBus.$emit('update:selected', _this.selected, childVm); // item 为选中的那个组件
 
           }
         });
@@ -13830,8 +13830,20 @@ exports.default = void 0;
 var _default = {
   name: 'PandaTabsHead',
   inject: ['eventBus'],
-  created: function created() {
-    this.eventBus.$emit('update:selected', this.selected);
+  mounted: function mounted() {
+    var _this = this;
+
+    this.eventBus.$on('update:selected', function (item, vm) {
+      var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
+          width = _vm$$el$getBoundingCl.width,
+          height = _vm$$el$getBoundingCl.height,
+          top = _vm$$el$getBoundingCl.top,
+          left = _vm$$el$getBoundingCl.left; //这里有报错，但 $el 确实存在，报错显示 undefined
+
+
+      _this.$refs.line.style.width = "".concat(width, "px");
+      _this.$refs.line.style.left = "".concat(left, "px");
+    });
   }
 };
 exports.default = _default;
@@ -13997,10 +14009,8 @@ var _default = {
 
     this.eventBus.$on('update:selected', function (name) {
       if (name === _this.name) {
-        console.log("\u6211\u88AB".concat(_this.name, "\u9009\u4E2D\u4E86"));
         _this.active = true;
       } else {
-        console.log("\u6211\u6CA1\u88AB".concat(_this.name, "\u9009\u4E2D"));
         _this.active = false;
       }
     });
@@ -14097,10 +14107,8 @@ var _default = {
 
     this.eventBus.$on('update:selected', function (name) {
       if (name === _this.name) {
-        console.log("pane ".concat(_this.name, "\u88AB\u9009\u4E2D\u4E86"));
         _this.active = true;
       } else {
-        console.log("pane ".concat(_this.name, "\u6CA1\u88AB\u9009\u4E2D"));
         _this.active = false;
       }
     });

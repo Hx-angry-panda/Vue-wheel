@@ -963,15 +963,20 @@
   display: flex;
   justify-content: flex-start;
   position: relative;
+  border-bottom: 1px solid #ddd;
 }
 .tabs-head > .line[data-v-d297de] {
     position: absolute;
     bottom: 0;
     border-bottom: 1px solid blue;
-    width: 100px;
+    transition: all 0.3s;
 }
 .tabs-head > .actions-wrapper[data-v-d297de] {
     margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
 }
 
 .tabs-item[data-v-5765b4] {
@@ -987,7 +992,7 @@
     font-weight: bold;
 }
 
-.tabs-pane.active[data-v-46f37b] {
-  background: red;
+.tabs-pane[data-v-46f37b] {
+  padding: 1em;
 }
 

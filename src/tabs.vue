@@ -35,7 +35,7 @@
                 if (vm.$options.name === 'PandaTabsHead') {
                     vm.$children.forEach((childVm) => {
                         if (childVm.$options.name === 'PandaTabsItem' && childVm.name === this.selected) {
-                            this.eventBus.$emit('update:selected', this.selected, item)
+                            this.eventBus.$emit('update:selected', this.selected, childVm)
                             // item 为选中的那个组件
                         }
                     })
