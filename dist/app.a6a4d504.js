@@ -14192,6 +14192,211 @@ render._withStripped = true
       
       }
     })();
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/popover.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: 'PandaPopover',
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
+  props: {
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
+      }
+    },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator: function validator(value) {
+        return ['click', 'hover'].indexOf(value) >= 0;
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (this.trigger === 'click') {
+      this.$refs.popover.addEventListener('click', this.onClick);
+    } else {
+      this.$refs.popover.addEventListener('mouseenter', this.open);
+      this.$refs.popover.addEventListener('mouseleave', this.close);
+    }
+  },
+  destroyed: function destroyed() {
+    if (this.trigger === 'click') {
+      this.$refs.popover.removeEventListener('click', this.onClick);
+    } else {
+      this.$refs.popover.removeEventListener('mouseenter', this.open);
+      this.$refs.popover.removeEventListener('mouseleave', this.close);
+    }
+  },
+  methods: {
+    onClick: function onClick(event) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        //点击的按钮是否为this.$refs.triggerWrapper的子节点
+        if (this.visible === true) {
+          this.close();
+        } else {
+          this.open();
+        }
+      }
+    },
+    positionContent: function positionContent() {
+      var _this$$refs = this.$refs,
+          contentWrapper = _this$$refs.contentWrapper,
+          triggerWrapper = _this$$refs.triggerWrapper;
+      document.body.appendChild(contentWrapper); //宽、高、离屏幕页面顶部长度、离页面左边长度
+
+      var _triggerWrapper$getBo = triggerWrapper.getBoundingClientRect(),
+          width = _triggerWrapper$getBo.width,
+          height = _triggerWrapper$getBo.height,
+          top = _triggerWrapper$getBo.top,
+          left = _triggerWrapper$getBo.left; //把contentWrapper.getBoundingClientRect().height 赋值给 height2
+
+
+      var _contentWrapper$getBo = contentWrapper.getBoundingClientRect(),
+          height2 = _contentWrapper$getBo.height;
+
+      var positions = {
+        top: {
+          top: top + window.scrollY,
+          left: left + window.scrollX
+        },
+        bottom: {
+          top: top + height + window.scrollY,
+          left: left + window.scrollX
+        },
+        left: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX
+        },
+        right: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX + width
+        }
+      };
+      contentWrapper.style.left = positions[this.position].left + 'px';
+      contentWrapper.style.top = positions[this.position].top + 'px';
+    },
+    close: function close() {
+      this.visible = false;
+      document.removeEventListener('click', this.onClickDocument);
+    },
+    open: function open() {
+      var _this = this;
+
+      this.visible = true;
+      this.$nextTick(function () {
+        _this.positionContent();
+
+        document.addEventListener('click', _this.onClickDocument);
+      });
+    },
+    onClickDocument: function onClickDocument(event) {
+      //this.$refs.popover存在并且this.$refs.popover为按钮或者this.$refs.popover的子节点为按钮，就什么都不做
+      //不然则把 popover 关闭，并移除事件
+      if (this.$refs.popover && (this.$refs.popover === event.target || this.$refs.popover.contains(event.target))) {
+        return;
+      } //在 popover 中选中不会关闭并移除事件
+
+
+      if (this.$refs.contentWrapper && (this.$refs.contentWrapper === event.target || this.$refs.contentWrapper.contains(event.target))) {
+        return;
+      } else {
+        this.close();
+      }
+    }
+  }
+};
+exports.default = _default;
+        var $81c3a9 = exports.default || module.exports;
+      
+      if (typeof $81c3a9 === 'function') {
+        $81c3a9 = $81c3a9.options;
+      }
+    
+        /* template */
+        Object.assign($81c3a9, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { ref: "popover", staticClass: "popover" }, [
+    _vm.visible
+      ? _c(
+          "div",
+          {
+            ref: "contentWrapper",
+            staticClass: "content-wrapper",
+            class: ["position-" + _vm.position]
+          },
+          [_vm._t("content", null, { close: _vm.close })],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "span",
+      { ref: "triggerWrapper", staticStyle: { display: "inline-block" } },
+      [_vm._t("default")],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-81c3a9",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$81c3a9', $81c3a9);
+          } else {
+            api.reload('$81c3a9', $81c3a9);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -14233,6 +14438,8 @@ var _tabsItem = _interopRequireDefault(require("./tabs-item"));
 
 var _tabsPane = _interopRequireDefault(require("./tabs-pane"));
 
+var _popover = _interopRequireDefault(require("./popover"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue.default.component('g-button', _button.default);
@@ -14271,6 +14478,8 @@ _vue.default.component('g-tabs-item', _tabsItem.default);
 
 _vue.default.component('g-tabs-pane', _tabsPane.default);
 
+_vue.default.component('g-popover', _popover.default);
+
 new _vue.default({
   el: '#app',
   data: {
@@ -14308,7 +14517,7 @@ new _vue.default({
     }
   }
 });
-},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./layout":"src/layout.vue","./header":"src/header.vue","./sider":"src/sider.vue","./content":"src/content.vue","./footer":"src/footer.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./button-group":"src/button-group.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./layout":"src/layout.vue","./header":"src/header.vue","./sider":"src/sider.vue","./content":"src/content.vue","./footer":"src/footer.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue","./popover":"src/popover.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -14336,7 +14545,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "10442" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2057" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
