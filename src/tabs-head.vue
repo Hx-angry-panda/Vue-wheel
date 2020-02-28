@@ -14,8 +14,24 @@
         mounted() {
             this.eventBus.$on('update:selected', (item, vm) => {
                 let {width, height, top, left} = vm.$el.getBoundingClientRect()
+                let tabsPadding = vm.$parent.$parent.$el.style.paddingLeft
+                let appPadding = app.style.paddingLeft
                 this.$refs.line.style.width = `${width}px`
-                this.$refs.line.style.left = `${left}px`
+                //g-tabs 有 padding-left 存在
+                if(tabsPadding){
+                    //app 和 g-tabs 同时有 padding-left 存在
+                    if(appPadding){
+                        this.$refs.line.style.left = `${left}` - `${parseInt(tabsPadding)}` - `${parseInt(appPadding)}` + 'px'
+                    }else{
+                        //只有 g-tabs 有 padding-left 存在
+                        this.$refs.line.style.left = `${left}` - `${parseInt(tabsPadding)}` + 'px'
+                    }
+                } else if(appPadding){
+                    //只有 app 有 padding-left 存在
+                    this.$refs.line.style.left = `${left}` - `${parseInt(appPadding)}` + 'px'
+                }else{
+                    this.$refs.line.style.left = `${left}px`
+                }
             })
         }
 
