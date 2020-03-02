@@ -13045,7 +13045,7 @@ var validator = function validator(value) {
   var valid = true;
   keys.forEach(function (key) {
     //对数组每个元素执行一次函数
-    if (!['span', 'offset'].indexOf(key) >= 0) {
+    if (!['span', 'offset'].includes(key)) {
       valid = false;
     }
   });
@@ -14836,7 +14836,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7254" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13540" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

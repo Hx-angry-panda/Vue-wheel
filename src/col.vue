@@ -12,7 +12,7 @@
         let keys = Object.keys(value) //返回数组
         let valid = true
         keys.forEach(function (key) { //对数组每个元素执行一次函数
-            if (!['span','offset'].indexOf(key) >= 0){
+            if (!['span','offset'].includes(key)){
                 valid = false
             }
         })
