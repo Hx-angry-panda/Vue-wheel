@@ -12565,6 +12565,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   name: 'PandaButton',
   components: {
@@ -12580,6 +12581,10 @@ var _default = {
       }
     },
     loading: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }
@@ -12603,7 +12608,12 @@ exports.default = _default;
     "button",
     {
       staticClass: "g-button",
-      class: ((_obj = {}), (_obj["icon-" + _vm.iconPosition] = true), _obj),
+      class:
+        ((_obj = {}),
+        (_obj["icon-" + _vm.iconPosition] = true),
+        (_obj.disabled = _vm.disabled),
+        _obj),
+      attrs: { disabled: _vm.disabled },
       on: {
         click: function($event) {
           return _vm.$emit("click")
@@ -12776,6 +12786,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: 'PandaInput',
   components: {
@@ -12795,6 +12812,16 @@ var _default = {
     },
     iserror: {
       type: String
+    },
+    type: {
+      type: String,
+      validator: function validator(value) {
+        return ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week'].indexOf(value) >= 0;
+      }
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -12816,7 +12843,12 @@ exports.default = _default;
     { staticClass: "wrapper", class: { error: _vm.iserror } },
     [
       _c("input", {
-        attrs: { type: "text", disabled: _vm.disabled, readonly: _vm.readonly },
+        attrs: {
+          disabled: _vm.disabled,
+          readonly: _vm.readonly,
+          type: _vm.type,
+          required: _vm.required
+        },
         domProps: { value: _vm.value },
         on: {
           change: function($event) {
@@ -14804,7 +14836,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "11965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7254" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

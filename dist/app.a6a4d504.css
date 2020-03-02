@@ -51,6 +51,16 @@
 .loading[data-v-2cd60d] {
   animation: spin-data-v-2cd60d 2s infinite linear;
 }
+.disabled[data-v-2cd60d] {
+  background: #D8D8D8;
+  cursor: not-allowed;
+}
+.disabled[data-v-2cd60d]:hover {
+    border-color: var(--border-color);
+}
+.disabled[data-v-2cd60d]:active {
+    background: #D8D8D8;
+}
 
 .g-button-group[data-v-981abc] {
   display: inline-flex;
@@ -79,6 +89,7 @@
   font-size: 14px;
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
 }
 .wrapper[data-v-924b3b] :not(last-child) {
     margin-right: .5em;

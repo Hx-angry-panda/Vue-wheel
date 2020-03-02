@@ -1,5 +1,6 @@
 <template>
-    <button class="g-button" v-bind:class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')">
+    <button class="g-button" v-bind:class="{[`icon-${iconPosition}`]: true, disabled: disabled}"
+            @click="$emit('click')" :disabled="disabled">
         <g-icon v-if="icon && !loading" v-bind:name="icon" class="icon"></g-icon>
         <g-icon class="loading icon" v-if="loading" name="loading"></g-icon>
         <div class="content">
@@ -24,6 +25,10 @@
                 }
             },
             loading: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             }
@@ -60,5 +65,11 @@
     }
     .loading{
         animation: spin 2s infinite linear;
+    }
+    .disabled{
+        background: #D8D8D8;
+        cursor: not-allowed;
+        &:hover{border-color: var(--border-color);}
+        &:active{background: #D8D8D8;}
     }
 </style>
